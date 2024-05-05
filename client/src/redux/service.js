@@ -10,7 +10,7 @@ import {
 export const serviceApi = createApi({
   reducerPath: "serviceApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/",
+    baseUrl: `${import.meta.env.MODE}/api/`,
     credentials: "include",
   }),
   keepUnusedDataFor: 60 * 60 * 24 * 7,
@@ -115,9 +115,9 @@ export const serviceApi = createApi({
       providesTags: (result, error, args) => {
         return result
           ? [
-              ...result.posts.map(({ _id }) => ({ type: "Post", id: _id })),
-              { type: "Post", id: "LIST" },
-            ]
+            ...result.posts.map(({ _id }) => ({ type: "Post", id: _id })),
+            { type: "Post", id: "LIST" },
+          ]
           : [{ type: "Post", id: "LIST" }];
       },
       async onQueryStarted(params, { dispatch, queryFulfilled }) {
@@ -138,7 +138,7 @@ export const serviceApi = createApi({
         try {
           const { data } = await queryFulfilled;
           dispatch(deleteThePost(data));
-        } catch (err) {}
+        } catch (err) { }
       },
     }),
     likePost: builder.mutation({
