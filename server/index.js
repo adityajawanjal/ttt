@@ -11,7 +11,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin:"https://ttt-liard.vercel.app",
     credentials: true,
   })
 );
