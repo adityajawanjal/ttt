@@ -11,16 +11,13 @@ connectDB();
 
 app.use(
   cors({
-    origin:"https://ttt-liard.vercel.app",
+    origin: "https://ttt-liard.vercel.app",
     credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept,Authorization",
   })
 );
-app.use(function(req,res,next){
-  res.header('Access-Control-Allow-Origin','*');
-  res.header('Access-Control-Allow-Methods','GET , HEAD , POST , PUT , DELETE , OPTIONS');
-  res.header('Access-Control-Allow-Headers','Origin , X-Requested-With , Content-Type , Accept , Authorization');
-  next();
-});
+
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);
